@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1 | change color</title>
+    <style>
+        h1,div {
+            text-align: center;
+        }
+      
+    </style>
+</head>
+<body>
+    <h1>Task 1 of a Day</h1>
+
+     <div id="changemychoice">
+        <p>I'll change my color according to your choice.</p>
+     </div>
+     <input id="text">
+     <button id="button"> Submit</button>
+</body>
+
+<script>
+    const inputElement = document.getElementById("text");
+    const divelement = document.getElementById("changemychoice");
+    console.log(inputElement);
+
+    const buttonElement = document.getElementById("button");
+      buttonElement.addEventListener('click',function(){
+        divelement.style.color = inputElement.value;
+
+       
+      });
+
+
+</script>
+</html>

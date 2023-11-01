@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2 | Guess Random Number between 1 to 100</title>
+
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: rgb(106, 0, 255);
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #664caf;
+            color: rgb(219, 204, 204);
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a40b7b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1> Hey!Lets play the Guess the Number Game</h1><br>
+        <p>Please! Try to guess a number between 1 and 100.
+            <br> Let's play and enjoy.
+            <br>Have a nice time!
+        </p><br>
+        <input type="number" id="Inputforyou" placeholder="Hey! Enter Your Guess ">
+        <button onclick="Guessnumber() ">Submit Guess</button>
+        <p id="messageforyou"></p><br>
+
+        <p>Attempts left for you: <span id="attemptsforyou"></span></p>
+    </div>
+</body>
+
+
+
+<script>
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    const maxGuesses = 7;
+    let numberOfGuesses = 0;
+
+    function Guessnumber() {
+        const userInput = parseInt(document.getElementById('Inputforyou').value);//retrives user input element with Id (parseInt- convert userinput to an integer)
+        const message = document.getElementById('messageforyou');
+        const attemptsLeft = document.getElementById('attemptsforyou');
+
+        if (isNaN(userInput) || userInput < 1 || userInput > 100) {//Checks if the user's input is not a number (isNaN), less than 1, or greater than 100.
+
+            message.textContent = 'Hey! Please enter a valid number between 1 and 100.';
+            return;//preventing further execution of the function(after invalid input)
+        }
+        //display error message in the designated message area after validation(message.textContent)
+
+        numberOfGuesses++;//Increments the count of the user's attempts
+
+        if (userInput === randomNumber) {
+            message.textContent = `Congratulations! You've guessed the correct number in ${numberOfGuesses} ${numberOfGuesses === 1 ? 'attempt' : 'attempts'}. The number was ${randomNumber}.`;
+            disableInputButton();
+        } else if (userInput < randomNumber) {
+            message.textContent = ' Hey! Too low. Try a higher number.';
+        } else {
+            message.textContent = 'Hey! Too high. Try a lower number.';
+        }
+
+        const remainingAttempts = maxGuesses - numberOfGuesses;
+        attemptsLeft.textContent = remainingAttempts;
+
+        if (remainingAttempts === 0) {
+            message.textContent = `Hey! I'm Sorry, you've used all your attempts. Better luck next time. The number was ${randomNumber}.`;
+            disableInputButton();
+        }
+    }
+    //Calls the function to disable further input as the game is over(disableInputButton)
+    function disableInputButton() {
+        document.getElementById('userInput').disabled = true;
+        document.getElementsByTagName('button')[0].disabled = true;
+    }
+
+</script>
+
+</html>
